@@ -1,0 +1,9 @@
+build/
+.sconsign.dblite
+heartbeat
+out.cfg
+pin.log
+zsim-cmp.h5
+zsim-ev.h5
+zsim.h5
+zsim.out

@@ -36,8 +36,8 @@ def buildSim(cppFlags, dir, type, pgo=None):
     #env['CXX'] = 'g++ -flto -flto-report -fuse-linker-plugin'
     #env['CC'] = 'gcc -flto'
     #env["LINKFLAGS"] = " -O3 -finline "
-    env['CXX'] = os.environ["CXX"]
-    env['CC'] = os.environ["CC"]
+    env['CXX'] ='g++'
+    env['CC'] = 'gcc'
     if useIcc:
         env['CC'] = 'icc'
         env['CXX'] = 'icpc -ipo'
@@ -75,7 +75,7 @@ def buildSim(cppFlags, dir, type, pgo=None):
     ##env["CPPFLAGS"] += " -DDEBUG=1"
 
     # Be a Warning Nazi? (recommended)
-    env["CPPFLAGS"] += " -Werror "
+    #env["CPPFLAGS"] += " -Werror "
 
     # Enables lib and harness to use the same info/log code,
     # but only lib uses pin locks for thread safety
@@ -167,7 +167,7 @@ def buildSim(cppFlags, dir, type, pgo=None):
     # Boost regex
     BOOST = os.environ["BOOST"]
     env["CPPPATH"] += [BOOST]
-    env["LIBPATH"] += [joinpath(os.environ['BOOST'], "stage/lib")]
+    env["LIBPATH"] += [joinpath(os.environ['BOOST'], "lib")]
     env["LIBS"] += ["boost_regex"]
 
     # Do PGO?

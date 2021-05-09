@@ -1,6 +1,45 @@
 zsim-nvmain
 ===========
 
+Notes for this fork of AXLE zsim-nvmain
+---------------------------------------
+
+This repository is intended to be a fork of AXLE zsim-nvmain with modifications necessary to run make things work with dependencies in 2021
+
+```
+Kernel: 3.13.0-24-generic
+Distributor ID:	Ubuntu
+Description:	Ubuntu 14.04.6 LTS
+Release:	14.04
+Codename:	trusty
+Sun May  9 06:01:18 PDT 2021
+```
+Required dependecies are available under deps/ folder for easy access given that some of them are hard to find to work with this version of zsim+nvmain.
+
+To fetch NVMAIN submodule: ```git submodule update --init --recursive```
+
+Setup/run
+
+```
+source env.sh 	  		  # Read before sourcing. Sets all required dependencies
+scons -j16   	 		  # Build
+./build/opt/zsim tests/simple.cfg # Test run
+```
+
+Please feel free to contact me if you need a working VM image for your experiments
+
+Known issues
+------------
+
+Issue: gm_create failed shmget: Invalid argument
+Fix: ```sudo sh -c 'echo 1073741824> /proc/sys/kernel/shmmax'``` [Reference](https://github.com/s5z/zsim/issues/38)
+
+Issue : The Operating System configuration prevents Pin from using the default (parent) injection mode.
+Fix: ```sudo sh -c 'echo 0 > /proc/sys/kernel/yama/ptrace_scope'```
+
+Original README from the AXLE zsim-nvmain project
+-------------------------------------------------
+
 This is a modified verison of zsim that integrates a cycle accurate main memory
 simulator for emerging non-volatile memories -- NVMain. This fork has been 
 developed as part of the AXLE project `www.axleproject.eu`.
